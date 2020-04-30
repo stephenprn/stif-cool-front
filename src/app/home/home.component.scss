@@ -1,0 +1,134 @@
+$purple0-color: #280657;
+$purple1-color: #6e3db3;
+$purple2-color: #7d5ea8;
+$purple3-color: #9984b8;
+$purple4-color: #efebf5;
+
+$background-color-top: rgb(6, 15, 49);
+$background-color-bottom: $purple0-color;
+$grid-background-color: rgb(214, 77, 232);
+$grid-background-horizon-color: rgb(214, 77, 232, 0.4);
+$grid-background-square-size: 25px;
+$grid-background-horizon-height: 40px;
+
+$main-title-border-size: 2px;
+
+#home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100vh;
+  width: 100vw;
+
+  overflow: hidden;
+
+  > #main-title-container {
+    position: relative;
+
+    > .main-title {
+      filter: blur(1px);
+
+      padding: 50px;
+      margin: 0;
+
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translate(-50%, -50%);
+
+      text-transform: uppercase;
+      font-family: Impact, Charcoal, sans-serif;
+      // https://www.dafont.com/fr/super-retro-m54.font
+      font-style: italic;
+      font-size: 5rem;
+
+      &:not(.shadow) {
+        z-index: 1000;
+
+        background: linear-gradient(
+          $purple3-color 0%,
+          $purple4-color 50%,
+          $purple2-color 50%,
+          $purple4-color 80%
+        );
+
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+      }
+
+      &.shadow {
+        z-index: 100;
+
+        text-shadow: calc(-#{$main-title-border-size})
+            calc(-#{$main-title-border-size}) 0 $purple4-color,
+          calc(-#{$main-title-border-size}) calc(#{$main-title-border-size}) 0
+            $purple4-color,
+          calc(#{$main-title-border-size}) calc(-#{$main-title-border-size}) 0
+            $purple4-color,
+          calc(#{$main-title-border-size}) calc(#{$main-title-border-size}) 0
+            $purple4-color,
+          0 0 40px #ffffff;
+      }
+    }
+  }
+
+  > #grid-background-horizon {
+    z-index: 100;
+
+    position: absolute;
+
+    top: 50vh;
+
+    width: 100vw;
+    height: $grid-background-horizon-height;
+
+    background-image: linear-gradient(
+      $grid-background-horizon-color,
+      rgba(0, 0, 0, 0)
+    );
+  }
+
+  > #grid-background {
+    z-index: 10;
+
+    filter: blur(1px);
+
+    position: absolute;
+    left: 0;
+
+    width: 200vw;
+    height: calc(20 * #{$grid-background-square-size});
+
+    background-image: linear-gradient(
+        to right,
+        $grid-background-color 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, $grid-background-color 1px, transparent 1px);
+    background-color: $background-color-bottom;
+
+    background-size: $grid-background-square-size $grid-background-square-size;
+    transform: perspective(100px) rotateX(70deg) scale(0.53) translateY(50%);
+    animation: slide 10000ms linear infinite;
+    margin-left: -50%;
+  }
+
+  > #stars-background {
+    position: absolute;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: $background-color-top;
+  }
+}
+
+@keyframes slide {
+  0% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
