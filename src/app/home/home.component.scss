@@ -116,11 +116,24 @@ $main-title-border-size: 2px;
 
   > #stars-background {
     position: absolute;
+    top: 0;
+    left: 0;
 
     width: 100vw;
-    height: 100vh;
+    height: 50vh;
 
     background-color: $background-color-top;
+
+    animation: stars 120s ease-in-out;
+  }
+}
+
+@keyframes stars {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.5);
   }
 }
 

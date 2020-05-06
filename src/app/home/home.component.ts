@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 
 @Component({
   selector: "app-home",
@@ -6,39 +6,53 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent implements OnInit {
-  private readonly STARS_NUMBER = 300;
   private readonly STARS_SIZE = {
     min: 1,
     max: 5,
   };
+  private starsFrequency = 1;
+
+  @ViewChild("starsBackground") starsBackground: ElementRef;
 
   constructor() {}
 
   ngOnInit() {
-    this.initStars();
+    setTimeout(() => {
+      this.initStars();
+    }, this.starsFrequency);
   }
 
   private initStars() {
-    const starsBackground = document.getElementById("stars-background");
+    this.addStar();
+  }
 
-    for (let i = 0; i < this.STARS_NUMBER; i++) {
-      const star = document.createElement("div");
-      const size =
-        this.STARS_SIZE.min +
-        Math.random() * (this.STARS_SIZE.max - this.STARS_SIZE.min);
+  private addStar() {
+    const star = document.createElement("div");
+    const size =
+      this.STARS_SIZE.min +
+      Math.random() * (this.STARS_SIZE.max - this.STARS_SIZE.min);
+    const x = Math.random() * 100;
+    const y = Math.random() * 50;
 
-      star.style.position = "absolute";
-      star.style.backgroundColor = "#FFFFFF";
-      star.style.borderRadius = `${String(this.STARS_SIZE.max)}px`;
-      star.style.boxShadow = `0 0 ${String(size)}px #FFFFFF`;
+    star.className = "star";
+    star.style.boxShadow = `0 0 ${String(size)}px #FFFFFF`;
 
-      star.style.top = String(Math.random() * 100) + "vh";
-      star.style.left = String(Math.random() * 100) + "vw";
+    star.style.top = String(y) + "vh";
+    star.style.left = String(x) + "vw";
 
-      star.style.height = String(size) + "px";
-      star.style.width = String(size) + "px";
+    star.style.height = String(size) + "px";
+    star.style.width = String(size) + "px";
 
-      starsBackground.appendChild(star);
-    }
+    this.starsBackground.nativeElement.appendChild(star);
+
+    setTimeout(() => {
+      this.addStar();
+    }, this.getStarFrequency());
+  }
+
+  private getStarFrequency() {
+    this.starsFrequency += 1;
+
+    return Math.max(0, this.starsFrequency + (Math.random() - 1) * 20);
   }
 }
