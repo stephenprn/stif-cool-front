@@ -8,14 +8,13 @@ body {
 }
 
 .star {
-    position: absolute;
+  position: absolute;
 
-    background-color: $star-color;
-    border-radius: 50%;
+  background-color: $star-color;
+  border-radius: 50%;
 
-    animation: appears 0.2s ease-in-out;
+  animation: appears 0.2s ease-in-out, shine 0.5s infinite;
 }
-
 
 @keyframes appears {
   0% {
@@ -24,5 +23,15 @@ body {
 
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes shine {
+  0% {
+    box-shadow: 0 0 4px #ffffff;
+  }
+
+  100% {
+    box-shadow: 0 0 1px #ffffff;
   }
 }

@@ -1,0 +1,12 @@
+<div id="game-life">
+  <div id="game-life-grid">
+    <div class="game-life-row" *ngFor="let row of board">
+      <div class="game-life-case" [ngClass]="{ 'full': case.full }" *ngFor="let case of row" (click)="setCase(case)">
+      </div>
+    </div>
+  </div>
+
+  <div id="game-life-controls">
+      <button (click)="start()">Start</button>
+  </div>
+</div>

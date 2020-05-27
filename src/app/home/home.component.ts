@@ -10,6 +10,12 @@ export class HomeComponent implements OnInit {
     min: 1,
     max: 5,
   };
+  private readonly ANIMATION_SHINE_DURATIONS = {
+    min: 5,
+    max: 30,
+  };
+  private readonly ANIMATION_APPEARS_DURATION = "0.5s";
+
   private starsFrequency = 1;
 
   @ViewChild("starsBackground") starsBackground: ElementRef;
@@ -35,6 +41,10 @@ export class HomeComponent implements OnInit {
     const y = Math.random() * 50;
 
     star.className = "star";
+    star.style.animationDuration = `${this.ANIMATION_APPEARS_DURATION}, ${
+      Math.random() *
+      (this.ANIMATION_SHINE_DURATIONS.max - this.ANIMATION_SHINE_DURATIONS.min)
+    }s`;
     star.style.boxShadow = `0 0 ${String(size)}px #FFFFFF`;
 
     star.style.top = String(y) + "vh";
@@ -51,8 +61,12 @@ export class HomeComponent implements OnInit {
   }
 
   private getStarFrequency() {
-    this.starsFrequency += 1;
+    this.starsFrequency += 2;
 
     return Math.max(0, this.starsFrequency + (Math.random() - 1) * 20);
+  }
+
+  private addShootingStar() {
+    const shootingStar = document.createElement("div");
   }
 }

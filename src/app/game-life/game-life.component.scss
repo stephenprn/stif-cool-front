@@ -1,0 +1,24 @@
+$case-size: 25px;
+$case-full-color: blue;
+
+#game-life {
+  #game-life-grid {
+    .game-life-row {
+      display: flex;
+      flex-direction: row;
+
+      .game-life-case {
+        height: $case-size;
+        width: $case-size;
+
+        border: 1px solid black;
+
+        cursor: pointer;
+
+        &.full {
+          background-color: $case-full-color;
+        }
+      }
+    }
+  }
+}
