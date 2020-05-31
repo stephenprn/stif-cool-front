@@ -1,22 +1,65 @@
-$case-size: 25px;
-$case-full-color: blue;
+@import "./../../style-var.scss";
 
-#game-life {
-  #game-life-grid {
-    .game-life-row {
-      display: flex;
-      flex-direction: row;
+$grid-color: $pink-color;
 
-      .game-life-case {
-        height: $case-size;
-        width: $case-size;
+$case-size: 1.6vw;
+$case-full-color: $pink-color;
+$case-hover-color: $purple2-color;
 
-        border: 1px solid black;
+#game-life-container {
+  height: 100%;
+  width: 100%;
 
-        cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-        &.full {
-          background-color: $case-full-color;
+  > #game-life {
+    position: relative;
+
+    > #game-life-grid {
+      border: 1px solid $grid-color;
+      border-radius: $border-radius;
+
+      overflow: hidden;
+
+      .game-life-row {
+        filter: $blur-filter;
+
+        display: flex;
+        flex-direction: row;
+
+        .game-life-case {
+          height: $case-size;
+          width: $case-size;
+
+          border: 1px solid $grid-color;
+
+          cursor: pointer;
+
+          transition: background-color 50ms linear;
+
+          &.full {
+            background-color: $case-full-color;
+          }
+
+          &:hover {
+            background-color: $case-hover-color;
+          }
+        }
+      }
+    }
+
+    > #game-life-controls {
+      position: absolute;
+
+      top: 0;
+      left: 100%;
+      margin-left: $buttons-margin;
+
+      > .button-cool {
+        &:not(:first-of-type) {
+          margin-top: $buttons-margin;
         }
       }
     }

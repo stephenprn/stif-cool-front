@@ -1,14 +1,40 @@
 <div id="home">
-    <div id="main-title-container">
-        <h1 class="main-title" id="main-title">stif.cool</h1>
-        <h1 class="main-title shadow" id="main-title-shadow">stif.cool</h1>
+  <div id="toolbar">
+    <div id="toolbar-buttons">
+      <button class="button-cool pink-text" (click)="showElement('GAME_LIFE')">
+        Game of life
+      </button>
+      <button class="button-cool pink-text" (click)="showElement('SORTING')">
+        Sorting
+      </button>
     </div>
+  </div>
 
-    <div id="grid-background-horizon"></div>
+  <div id="main-title-container" *ngIf="elementIdShowed === 'HOME'">
+    <h1 class="main-title" id="main-title">stif.cool</h1>
+    <h1 class="main-title shadow" id="main-title-shadow">stif.cool</h1>
+  </div>
 
-    <div id="grid-background">
-    </div>
+  <div id="grid-background-horizon"></div>
 
-    <div #starsBackground id="stars-background">
-    </div>
+  <div id="grid-background"></div>
+
+  <div #starsBackground id="stars-background"></div>
+
+  <div
+    class="no-blur element-container"
+    *ngIf="elementIdShowed === 'GAME_LIFE'"
+  >
+    <app-game-life></app-game-life>
+  </div>
+
+  <div class="no-blur element-container" *ngIf="elementIdShowed === 'SORTING'">
+    <app-sorting></app-sorting>
+  </div>
+
+  <div
+    id="backdrop"
+    *ngIf="elementIdShowed !== 'HOME'"
+    (click)="showElement('HOME')"
+  ></div>
 </div>

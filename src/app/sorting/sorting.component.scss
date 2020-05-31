@@ -1,0 +1,47 @@
+@import "./../../style-var.scss";
+
+$sorting-width: 80%;
+$sorting-height: 80%;
+
+$sorting-element-color: $pink-color;
+
+#sorting-container {
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  > #sorting {
+    height: $sorting-height;
+    width: $sorting-width;
+
+    display: flex;
+    flex-direction: column;
+
+    > #sorting-board {
+      height: 100%;
+      width: 100%;
+
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+
+      > .sorting-element {
+        background-color: $sorting-element-color;
+        box-shadow: inset 0px 0px 0px 1px $background-color;
+      }
+    }
+
+    > #sorting-controls {
+      margin-top: $buttons-margin;
+
+      > .button-cool {
+        &:not(:first-of-type) {
+          margin-left: $buttons-margin;
+        }
+      }
+    }
+  }
+}

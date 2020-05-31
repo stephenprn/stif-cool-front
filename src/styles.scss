@@ -1,4 +1,7 @@
+@import "./style-var.scss";
+
 $star-color: #ffffff;
+$button-cool-padding: 5px 20px;
 
 body {
   margin: 0;
@@ -13,7 +16,37 @@ body {
   background-color: $star-color;
   border-radius: 50%;
 
-  animation: appears 0.2s ease-in-out, shine 0.5s infinite;
+  // animation: appears 0.2s ease-in-out, shine 0.5s infinite;
+}
+
+.pink-text {
+  color: $pink-color;
+
+  font-weight: 300;
+  font-size: 1.2rem;
+  font-family: $impact-font;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+
+button.button-cool {
+  border: 2px solid $pink-color;
+  border-radius: $border-radius;
+
+  padding: $button-cool-padding;
+
+  background-color: $background-color;
+
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  filter: $blur-filter;
+
+  &:hover {
+    background-color: $pink-color;
+    color: $background-color;
+  }
 }
 
 @keyframes appears {

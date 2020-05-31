@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import cloneDeep from "lodash/cloneDeep";
+import sample from "lodash/sample";
 
 class GameCase {
   x: number;
@@ -25,12 +26,17 @@ export class GameLifeComponent implements OnInit {
   private readonly REFRESH_FREQ = 500; // milliseconds
 
   public board: GameCase[][];
+  private intervalSteps: any = null;
+
+  public running = false;
 
   constructor() {}
 
   ngOnInit() {
     this.initBoard();
   }
+
+  // init methods
 
   // ---> x
   // |
@@ -51,20 +57,23 @@ export class GameLifeComponent implements OnInit {
     }
   }
 
-  setCase(gameCase: GameCase) {
+  // public methods
+
+  public setCase(gameCase: GameCase) {
     gameCase.full = !gameCase.full;
   }
 
-  start() {
-    this.nextStep();
-
-    setInterval(() => {
-      this.nextStep();
-    }, this.REFRESH_FREQ);
+  public triggerSteps() {
+    if (this.running) {
+      this.stopSteps();
+    } else {
+      this.startSteps();
+    }
   }
 
-  nextStep() {
+  public nextStep() {
     const newBoard = [];
+    let empty = true;
 
     this.board.forEach((row: GameCase[]) => {
       const newRow = [];
@@ -75,6 +84,7 @@ export class GameLifeComponent implements OnInit {
         const nbrAdj = this.getNbrAdjacents(gameCase);
         if (nbrAdj === 3 || (gameCase.full && nbrAdj === 2)) {
           gameCase.full = true;
+          empty = false;
         } else {
           gameCase.full = false;
         }
@@ -86,6 +96,59 @@ export class GameLifeComponent implements OnInit {
     });
 
     this.board = newBoard;
+
+    if (empty) {
+      this.stopSteps();
+    }
+  }
+
+  public trackByFn(index, item) {
+    return index;
+  }
+
+  public clearGrid() {
+    this.stopSteps();
+
+    this.board.forEach((row: GameCase[]) => {
+      row.forEach((gameCase: GameCase) => {
+        gameCase.full = false;
+      });
+    });
+  }
+
+  public randomizeGrid() {
+    this.board.forEach((row: GameCase[]) => {
+      row.forEach((gameCase: GameCase) => {
+        gameCase.full = sample([true, false]);
+      });
+    });
+  }
+
+  // private methods
+
+  private startSteps() {
+    console.log('startSteps');
+    console.log('running', this.running);
+    if (this.intervalSteps !== null) {
+      return;
+    }
+
+    this.running = true;
+    this.nextStep();
+
+    this.intervalSteps = setInterval(() => {
+      this.nextStep();
+    }, this.REFRESH_FREQ);
+  }
+
+  private stopSteps() {
+    if (this.intervalSteps === null) {
+      return;
+    }
+
+    this.running = false;
+    clearInterval(this.intervalSteps);
+    this.intervalSteps = null;
   }
 
   private getNbrAdjacents(gameCase: GameCase) {

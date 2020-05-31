@@ -1,0 +1,27 @@
+<div id="sorting-container">
+  <div id="sorting">
+    <div id="sorting-board">
+      <div
+        class="sorting-element"
+        *ngFor="let elt of sortingElements"
+        [ngStyle]="{ height: elt.height, width: widthElement }"
+      ></div>
+    </div>
+
+    <div id="sorting-controls">
+      <button class="button-cool pink-text" (click)="triggerSteps('SELECTION')">
+        <!-- <img
+          [src]="running ? 'assets/icons/stop.svg' : 'assets/icons/start.svg'"
+          class="button-cool-icon"
+        /> -->
+        {{ running ? "pause" : "start" }}
+      </button>
+      <!-- <button class="button-cool pink-text" (click)="nextStep()">
+        next step
+      </button> -->
+      <!-- <button class="button-cool pink-text" (click)="randomizeGrid()">
+        randomize
+      </button> -->
+    </div>
+  </div>
+</div>

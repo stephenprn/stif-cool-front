@@ -1,17 +1,17 @@
-$purple0-color: #280657;
-$purple1-color: #6e3db3;
-$purple2-color: #7d5ea8;
-$purple3-color: #9984b8;
-$purple4-color: #efebf5;
+@import "./../../style-var.scss";
 
-$background-color-top: rgb(6, 15, 49);
 $background-color-bottom: $purple0-color;
-$grid-background-color: rgb(214, 77, 232);
+
 $grid-background-horizon-color: rgb(214, 77, 232, 0.4);
 $grid-background-square-size: 25px;
 $grid-background-horizon-height: 40px;
 
 $main-title-border-size: 2px;
+
+$toolbar-padding-horizontal: 30px;
+$toolbar-padding-vertical: 30px;
+
+$backdrop-color: rgba(0, 0, 0, 0.5);
 
 #home {
   display: flex;
@@ -23,11 +23,35 @@ $main-title-border-size: 2px;
 
   overflow: hidden;
 
+  > #toolbar {
+    position: fixed;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    z-index: 100;
+
+    top: 0;
+    left: 0;
+
+    width: calc(100vw - 2 *#{$toolbar-padding-horizontal});
+    padding: $toolbar-padding-vertical $toolbar-padding-horizontal;
+
+    >#toolbar-buttons {
+      > .button-cool {
+        &:not(:first-of-type) {
+          margin-left: $buttons-margin;
+        }
+      }
+    }
+  }
+
   > #main-title-container {
     position: relative;
 
     > .main-title {
-      filter: blur(1px);
+      filter: $blur-filter;
 
       padding: 50px;
       margin: 0;
@@ -38,7 +62,7 @@ $main-title-border-size: 2px;
       transform: translate(-50%, -50%);
 
       text-transform: uppercase;
-      font-family: Impact, Charcoal, sans-serif;
+      font-family: $impact-font;
       // https://www.dafont.com/fr/super-retro-m54.font
       font-style: italic;
       font-size: 5rem;
@@ -92,7 +116,7 @@ $main-title-border-size: 2px;
   > #grid-background {
     z-index: 10;
 
-    filter: blur(1px);
+    filter: $blur-filter;
 
     position: absolute;
     left: 0;
@@ -102,10 +126,10 @@ $main-title-border-size: 2px;
 
     background-image: linear-gradient(
         to right,
-        $grid-background-color 1px,
+        $pink-color 1px,
         transparent 1px
       ),
-      linear-gradient(to bottom, $grid-background-color 1px, transparent 1px);
+      linear-gradient(to bottom, $pink-color 1px, transparent 1px);
     background-color: $background-color-bottom;
 
     background-size: $grid-background-square-size $grid-background-square-size;
@@ -122,9 +146,37 @@ $main-title-border-size: 2px;
     width: 100vw;
     height: 50vh;
 
-    background-color: $background-color-top;
+    background-color: $background-color;
 
     animation: stars 120s ease-in-out;
+  }
+
+  > .element-container {
+    height: 80vh;
+    width: 80vw;
+
+    z-index: 100;
+
+    background-color: $background-color;
+
+    border-radius: $border-radius;
+    border: 2px solid $pink-color;
+
+    box-shadow: 0 0 20px $pink-color;
+  }
+
+  > #backdrop {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    height: 100vh;
+    width: 100vw;
+
+    z-index: 50;
+
+    background-color: $backdrop-color;
   }
 }
 

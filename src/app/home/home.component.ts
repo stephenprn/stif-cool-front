@@ -1,4 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Router } from "@angular/router";
+import { Location } from "@angular/common";
+
+type ElementId = "GAME_LIFE" | "HOME" | "SORTING";
+interface RouteElement {
+  id: ElementId;
+  route: string;
+}
 
 @Component({
   selector: "app-home",
@@ -15,14 +23,22 @@ export class HomeComponent implements OnInit {
     max: 30,
   };
   private readonly ANIMATION_APPEARS_DURATION = "0.5s";
+  private readonly ROUTES_ELEMENTS: RouteElement[] = [
+    { id: "HOME", route: "/" },
+    { id: "GAME_LIFE", route: "/game-life" },
+    { id: "SORTING", route: "/sorting" },
+  ];
 
   private starsFrequency = 1;
 
+  public elementIdShowed: ElementId;
+
   @ViewChild("starsBackground") starsBackground: ElementRef;
 
-  constructor() {}
+  constructor(private router: Router, private location: Location) {}
 
   ngOnInit() {
+    this.initElementShowed();
     setTimeout(() => {
       this.initStars();
     }, this.starsFrequency);
@@ -31,6 +47,37 @@ export class HomeComponent implements OnInit {
   private initStars() {
     this.addStar();
   }
+
+  private initElementShowed() {
+    const route = this.router.url;
+
+    for (const elt of this.ROUTES_ELEMENTS) {
+      if (route === elt.route) {
+        this.elementIdShowed = elt.id;
+        return;
+      }
+    }
+
+    this.elementIdShowed = "HOME";
+  }
+
+  // public methods
+
+  public showElement(elementId: ElementId) {
+    if (elementId !== "HOME" && this.elementIdShowed === elementId) {
+      this.elementIdShowed = "HOME";
+    } else {
+      this.elementIdShowed = elementId;
+    }
+
+    this.location.replaceState(
+      this.ROUTES_ELEMENTS.find(
+        (elt: RouteElement) => elt.id === this.elementIdShowed
+      ).route
+    );
+  }
+
+  // private methods
 
   private addStar() {
     const star = document.createElement("div");
