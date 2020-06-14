@@ -12,20 +12,20 @@
     </div>
 
     <div id="game-life-controls">
-      <button class="button-cool pink-text" (click)="triggerSteps()">
+      <button class="element-control-cool" (click)="triggerSteps()">
         <!-- <img
           [src]="running ? 'assets/icons/stop.svg' : 'assets/icons/start.svg'"
-          class="button-cool-icon"
+          class="element-control-cool-icon"
         /> -->
         {{ running ? "pause" : "start" }}
       </button>
-      <button class="button-cool pink-text" (click)="nextStep()">
+      <button class="element-control-cool" (click)="nextStep()">
         next step
       </button>
-      <button class="button-cool pink-text" (click)="clearGrid()">
+      <button class="element-control-cool" (click)="clearGrid()">
         clear
       </button>
-      <button class="button-cool pink-text" (click)="randomizeGrid()">
+      <button class="element-control-cool" (click)="randomizeGrid()">
         randomize
       </button>
     </div>

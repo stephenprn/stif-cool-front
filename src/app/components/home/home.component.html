@@ -1,10 +1,16 @@
 <div id="home">
-  <div id="toolbar">
+  <div id="toolbar" (click)="showElement('HOME')">
     <div id="toolbar-buttons">
-      <button class="button-cool pink-text" (click)="showElement('GAME_LIFE')">
+      <button
+        class="element-control-cool"
+        (click)="showElement('GAME_LIFE'); $event.stopPropagation()"
+      >
         Game of life
       </button>
-      <button class="button-cool pink-text" (click)="showElement('SORTING')">
+      <button
+        class="element-control-cool"
+        (click)="showElement('SORTING'); $event.stopPropagation()"
+      >
         Sorting
       </button>
     </div>
@@ -21,14 +27,11 @@
 
   <div #starsBackground id="stars-background"></div>
 
-  <div
-    class="no-blur element-container"
-    *ngIf="elementIdShowed === 'GAME_LIFE'"
-  >
+  <div class="element-container" *ngIf="elementIdShowed === 'GAME_LIFE'">
     <app-game-life></app-game-life>
   </div>
 
-  <div class="no-blur element-container" *ngIf="elementIdShowed === 'SORTING'">
+  <div class="element-container" *ngIf="elementIdShowed === 'SORTING'">
     <app-sorting></app-sorting>
   </div>
 

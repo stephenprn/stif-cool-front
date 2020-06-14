@@ -1,8 +1,9 @@
-@import "./../../style-var.scss";
+@import "./../../../style-var.scss";
 
 $grid-color: $pink-color;
 
-$case-size: 1.6vw;
+$case-size: 2.8vh;
+$case-max-size: 1.8vw;
 $case-full-color: $pink-color;
 $case-hover-color: $purple2-color;
 
@@ -33,6 +34,9 @@ $case-hover-color: $purple2-color;
           height: $case-size;
           width: $case-size;
 
+          max-height: $case-max-size;
+          max-width: $case-max-size;
+
           border: 1px solid $grid-color;
 
           cursor: pointer;
@@ -55,11 +59,11 @@ $case-hover-color: $purple2-color;
 
       top: 0;
       left: 100%;
-      margin-left: $buttons-margin;
+      margin-left: $controls-margin;
 
-      > .button-cool {
+      > .element-control-cool {
         &:not(:first-of-type) {
-          margin-top: $buttons-margin;
+          margin-top: $controls-margin;
         }
       }
     }

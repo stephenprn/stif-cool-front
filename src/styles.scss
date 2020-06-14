@@ -1,7 +1,7 @@
 @import "./style-var.scss";
 
 $star-color: #ffffff;
-$button-cool-padding: 5px 20px;
+$cool-padding: 5px 20px;
 
 body {
   margin: 0;
@@ -19,7 +19,7 @@ body {
   // animation: appears 0.2s ease-in-out, shine 0.5s infinite;
 }
 
-.pink-text {
+.text-cool {
   color: $pink-color;
 
   font-weight: 300;
@@ -31,11 +31,16 @@ body {
   white-space: nowrap;
 }
 
-button.button-cool {
+.bordered-cool {
   border: 2px solid $pink-color;
   border-radius: $border-radius;
+}
 
-  padding: $button-cool-padding;
+.element-control-cool {
+  @extend .text-cool;
+  @extend .bordered-cool;
+
+  padding: $cool-padding;
 
   background-color: $background-color;
 

@@ -1,0 +1,38 @@
+<div id="sorting-container">
+  <div id="sorting">
+    <div id="sorting-board">
+      <div
+        class="sorting-element"
+        *ngFor="let elt of sortingElements"
+        [ngStyle]="{ height: elt.height, width: widthElement }"
+        [ngClass]="{ selected: elt.selected }"
+      ></div>
+    </div>
+
+    <div id="sorting-controls">
+      <div class="sorting-controls-group">
+        <select class="element-control-cool" [(ngModel)]="sortingAlgoIdSelected">
+          <option *ngFor="let algo of SORT_ALGOS" [value]="algo.id">{{
+            algo.name
+          }}</option>
+        </select>
+        <button class="element-control-cool" (click)="triggerSortAlgo()">
+          <!-- <img
+            [src]="running ? 'assets/icons/stop.svg' : 'assets/icons/start.svg'"
+            class="element-control-cool-icon"
+          /> -->
+          {{ running ? "pause" : "start" }}
+        </button>
+        <button class="element-control-cool" (click)="randomize()">
+          randomize
+        </button>
+      </div>
+
+      <div class="sorting-controls-group">
+      <button class="element-control-cool" (click)="setMuted()">
+        <i class="fa" [ngClass]="{ 'fa-volume-up': muted, 'fa-volume-off': !muted }"></i>
+      </button>
+      </div>
+    </div>
+  </div>
+</div>
